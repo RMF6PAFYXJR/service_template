@@ -1,0 +1,25 @@
+﻿{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "RKFFSW",
+  "classifications": [ "Web", "API", "Microservice" ],
+  "identity": "RKFFSW.service_template.Template",
+  "name": "RKFFSW Clean Service Template",
+  "shortName": "service_template",
+  "sourceName": "service_template",
+  "description": "A clean microservice template with Swagger, Middleware, EF migrations, Redis, and Nginx-ready setup.",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {
+    "skipSwagger": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Skip adding Swagger configuration."
+    }
+  },
+  "primaryOutputs": [
+    { "path": "service_template.csproj" }
+  ]
+}
