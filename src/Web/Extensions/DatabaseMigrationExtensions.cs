@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using service_template.Data;
+using service_template.Infrastructure.Persistence;
 
-namespace service_template.Extensions;
+namespace service_template.Web.Extensions;
 
 public static class DatabaseMigrationExtensions
 {

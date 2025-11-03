@@ -1,6 +1,4 @@
-﻿using Serilog;
-
-namespace service_template.Middlewares;
+﻿namespace service_template.Web.Middlewares;
 
 public class ApiKeyMiddleware(RequestDelegate next, IConfiguration config)
 {

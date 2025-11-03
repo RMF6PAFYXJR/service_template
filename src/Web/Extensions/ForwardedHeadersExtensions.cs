@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.HttpOverrides;
 
-namespace service_template.Extensions;
+namespace service_template.Web.Extensions;
 
 
 public static class ForwardedHeadersExtensions

@@ -1,11 +1,10 @@
-using service_template.Extensions;
+using service_template.Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-var configuration = builder.Configuration;
 
 builder.Services
     .AddForwardedHeadersSupport()
-    .AddAppServices(configuration)
+    .AddInfrastructure(builder.Configuration)
     .AddSwaggerDocumentation();
 
 var app = builder.Build();

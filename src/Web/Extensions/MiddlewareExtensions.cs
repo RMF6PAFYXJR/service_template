@@ -1,6 +1,6 @@
-﻿using service_template.Middlewares;
+﻿using service_template.Web.Middlewares;
 
-namespace service_template.Extensions;
+namespace service_template.Web.Extensions;
 
 public static class MiddlewareExtensions
 {

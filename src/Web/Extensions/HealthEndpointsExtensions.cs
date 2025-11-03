@@ -1,7 +1,4 @@
-﻿namespace service_template.Extensions;
-
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
+﻿namespace service_template.Web.Extensions;
 
 public static class HealthEndpointsExtensions
 {
