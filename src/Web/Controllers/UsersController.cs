@@ -8,7 +8,7 @@ namespace service_template.Web.Controllers;
 [Route("api/[controller]")]
 public class UserController(CreateUserUseCase useCase) : ControllerBase
 {
-    [HttpPost("create")] // добавляем конкретный сегмент маршрута
+    [HttpPost("create")]
     [ProducesResponseType(typeof(CreateUserRequest), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreateUserRequest request)
