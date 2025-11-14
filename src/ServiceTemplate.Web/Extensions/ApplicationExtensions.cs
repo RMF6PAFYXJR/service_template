@@ -1,0 +1,16 @@
+﻿using ServiceTemplate.Application.UseCases;
+
+namespace ServiceTemplate.Web.Extensions;
+
+public static class ApplicationExtensions
+{
+    /// <summary>
+    /// Registers all application-level use cases and business logic handlers.
+    /// </summary>
+    public static IServiceCollection AddApplication(this IServiceCollection services)
+    {
+        services.AddScoped<CreateUserUseCase>();
+        // services.AddScoped<AnotherUseCase>();
+        return services;
+    }
+}

@@ -1,162 +1,99 @@
-# ⚙️ RKFFSW ASP.NET 9 Web API Template
+# ⚙️ RKFFSW ASP.NET 10 Web API Template
 
-**Version 1.1**
-A clean and modern **ASP.NET 9 Web API template** built around **Clean Architecture** principles — serving as a foundation for all your backend microservices.
+**Version 2.0**
+This is an updated, modern template for an **ASP.NET 10 Web API**, built with Clean Architecture principles — a ready base for services and microservices.
 
 ---
 
 ## 🚀 Overview
 
-This template provides a **scalable**, **modular**, and **testable** base for service-oriented APIs.
-It’s ready for production with:
+The template provides a scalable, modular, and testable foundation for backend services and includes a set of ready integrations and patterns to accelerate development.
 
-* ✅ Preconfigured **Swagger** (with API Key authentication example)
-* ✅ Built-in **PostgreSQL** and **Redis** integration
-* ✅ Automatic **EF Core migrations**
-* ✅ Global **middleware pipeline**
-* ✅ Modular extension-based startup (clean `Program.cs`)
-* ✅ Ready-to-deploy **Docker** & **NGINX reverse proxy** setup
-* ✅ Based on **Domain-Driven Design (DDD)** & **Use Case** patterns
+Includes:
+
+* ✅ Preconfigured Swagger / OpenAPI
+* ✅ PostgreSQL and Redis integration
+* ✅ Entity Framework Core (migrations included)
+* ✅ Global middleware pipeline
+* ✅ Clean configuration in `Program.cs`
+* ✅ Docker + nginx-ready configuration
+* ✅ Domain-driven structure and Use Case patterns
 
 ---
 
 ## 🧩 Technologies
 
-| Component                 | Description                     |
-| ------------------------- | ------------------------------- |
-| **.NET 9**                | Core framework for the API      |
-| **PostgreSQL**            | Primary database                |
-| **Redis**                 | Caching and data storage        |
-| **Entity Framework Core** | ORM with migrations             |
-| **Swagger / OpenAPI**     | API documentation and testing   |
-| **Docker & Compose**      | Containerized deployment        |
-| **Nginx-ready setup**     | Works seamlessly behind a proxy |
+| Component                        | Description                        |
+|----------------------------------|------------------------------------|
+| **.NET 10**                      | Target platform                    |
+| **PostgreSQL**                   | Primary DBMS                       |
+| **Redis**                        | Caching                            |
+| **Entity Framework Core 10**     | ORM and migrations                 |
+| **Swagger / OpenAPI**            | API documentation and testing      |
+| **Docker & Compose**             | Containerization                   |
 
 ---
 
-## 🧠 Architecture Overview
+## 🧠 Project structure (brief)
+
+The `src/` folder contains the layered projects:
 
 ```
-          ┌───────────────────────────┐
-          │        Presentation       │
-          │ (Controllers, Middleware) │
-          └────────────┬──────────────┘
-                       │
-                       ▼
-          ┌───────────────────────────┐
-          │        Application        │
-          │ (UseCases, DTOs, Mappers) │
-          └────────────┬──────────────┘
-                       │
-                       ▼
-          ┌───────────────────────────┐
-          │          Domain           │
-          │  (Entities, Interfaces)   │
-          └────────────┬──────────────┘
-                       │
-                       ▼
-          ┌───────────────────────────┐
-          │      Infrastructure       │
-          │ (Repositories, Services,  │
-          │  DbContext, Email, Redis) │
-          └───────────────────────────┘
-```
-
-**Flow Example:**
-
-```
-Controller → UseCase → Service → Repository → Database
+src/
+├─ ServiceTemplate.Domain/        # Core (entities, interfaces)
+├─ ServiceTemplate.Application/   # UseCases, DTOs, application logic
+├─ ServiceTemplate.Infrastructure/# Implementations, DbContext, repos
+└─ ServiceTemplate.Web/           # API, controllers, Swagger, middleware
 ```
 
 ---
 
-## 🗂 Project Structure
+## 🚀 Quick start
 
-```
-📁 src/
-├─ 📘 Domain/
-│   ├─ Entities/
-│   ├─ Interfaces/
-│   └─ Common/
-│
-├─ ⚙️ Application/
-│   ├─ DTOs/
-│   ├─ UseCases/
-│   ├─ Mappers/
-│   └─ Validators/
-│
-├─ 🏗 Infrastructure/
-│   ├─ Persistence/
-│   │   ├─ AppDbContext.cs
-│   │   └─ Repositories/
-│   │   
-│   ├─ Services/
-│   └─ Extensions/
-│
-├─ 🌐 API/
-│   ├─ Controllers/
-│   ├─ Middleware/
-│   └─ Extensions/
-│
-└─ 🏁 Program.cs
+1) Restore packages and run the API locally (Windows cmd):
+
+```bat
+dotnet restore
+dotnet build
+dotnet run --project src\ServiceTemplate.Web\ServiceTemplate.Web.csproj
 ```
 
----
+2) Run with Docker:
 
-## 🧱 Usage
-
-### 🛠 Create a new project from this template
-
-```bash
-dotnet new install ./
-dotnet new service_template -n MyNewService
-```
-
-### 🧰 Run with Docker
-
-```bash
+```bat
 docker compose up --build -d
 ```
 
-Your service will be available at:
+By default Swagger is available at:
 
 ```
 http://localhost:8080/swagger
 ```
 
----
+3) Working with EF Core migrations:
 
-## ⚙️ Commands and Tools
-
-| Action               | Command                                    |
-| -------------------- | ------------------------------------------ |
-| Add migration        | `dotnet ef migrations add "MigrationName"` |
-| Apply migrations     | `dotnet ef database update`                |
-| Run Docker container | `docker compose up --build -d`             |
-| Create from template | `dotnet new service_template -n MyService` |
+```bat
+dotnet ef migrations add "MigrationName" --project src\ServiceTemplate.Infrastructure\ServiceTemplate.Infrastructure.csproj --startup-project src\ServiceTemplate.Web\ServiceTemplate.Web.csproj
+dotnet ef database update --project src\ServiceTemplate.Infrastructure\ServiceTemplate.Infrastructure.csproj --startup-project src\ServiceTemplate.Web\ServiceTemplate.Web.csproj
+```
 
 ---
 
-## 🧩 Layer Summary
+## ✅ Recommended upgrade steps
 
-| Layer              | Responsibility                                                 |
-| ------------------ | -------------------------------------------------------------- |
-| **Domain**         | Core entities and contracts (pure logic, no dependencies)      |
-| **Application**    | UseCases and DTOs that coordinate services                     |
-| **Infrastructure** | Implementations (repositories, external APIs, services)        |
-| **API**            | Entry point layer — controllers, middleware, swagger, DI setup |
+1. Ensure every project in the solution targets `net10.0` (Web, Infrastructure, Application, Domain, Tests).
+2. Update the Npgsql provider to a version compatible with EF Core 10, or downgrade EF Core to 9.x if required (not recommended when moving to .NET 10).
+3. Install/upgrade `Swashbuckle.AspNetCore` to get `Microsoft.OpenApi.Models`.
+4. Run:
 
----
-
-## 💡 Notes
-
-* Designed for **Clean Architecture** and **DDD** enthusiasts.
-* You can easily extend it with **CQRS**, **MediatR**, or **gRPC**.
-* Keeps dependencies flowing **inward** — outer layers depend on inner ones, never the reverse.
+```bat
+dotnet restore
+dotnet build
+dotnet test
+```
 
 ---
 
 ## 🧑‍💻 Author
 
-**RKFFSW**
-*“Built once, reused everywhere.”*
+RKFFSW — "Built once, reused everywhere."
