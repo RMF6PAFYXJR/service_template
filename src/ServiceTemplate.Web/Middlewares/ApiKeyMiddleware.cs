@@ -9,9 +9,8 @@ public class ApiKeyMiddleware(RequestDelegate next, IConfiguration config)
 
     public async Task InvokeAsync(HttpContext context)
     {
-
         var path = context.Request.Path.Value?.ToLowerInvariant() ?? string.Empty;
-        if (SwaggerExtensions.IsSwaggerPath(path, config))
+        if (IsSwaggerOrHealthPath(path))
         {
             await next(context);
             return;
@@ -27,5 +26,11 @@ public class ApiKeyMiddleware(RequestDelegate next, IConfiguration config)
         }
 
         await next(context);
+    }
+    
+    private static bool IsSwaggerOrHealthPath(string path)
+    {
+        return SwaggerExtensions.IsSwaggerPath(path) ||
+               path.Equals("/health", StringComparison.OrdinalIgnoreCase);
     }
 }

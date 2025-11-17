@@ -6,7 +6,7 @@ builder.Services
     .AddForwardedHeadersSupport()
     .AddInfrastructure(builder.Configuration)
     .AddApplication()
-    .AddSwaggerDocumentation()
+    .AddSwaggerDocumentation(builder.Configuration)
     .AddControllers();
 
 var app = builder.Build();
